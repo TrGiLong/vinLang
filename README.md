@@ -1,30 +1,22 @@
-# Compiler Construction in Summer 2021
+# VinLang
 
-## This Project is NOT yet ready to be graded!
+## Information
 
-Why not? 
+- Specification
+  draft: [Google Docs](https://docs.google.com/document/d/1xPEmMNa3Uk88ojS0cZ2JavUKcekrdJztDJ9aVXjb9jc/edit#)
 
-Because this text is here! This text was written by Prof. Dr. Ronald C. Moore
-and he *hates* to see his own texts in students' repositories.
+- Tokens
+  example: [Link](https://softwareengineering.stackexchange.com/questions/328636/what-should-be-the-datatype-of-the-tokens-a-lexer-returns-to-its-parser)
+- Version: v0.1
 
-## What should we do?
+## Code guidelines
 
-The very first thing is: Delete This Text!
+### Project structure
 
-## That's it?!?
+Follow a project structure from [here](https://github.com/golang-standards/project-layout).
 
-Of course not! Write your own README.md instead! 
+- `cmd` is a main applications for this project.
+- `internal` is a private application and library code.
+- `pkg` is a library code that's ok to use by external applications
+- `vinlang_src` contains VinLang programs.
 
-Write whether there are branches, or tags -- everything that a visitor would not find to be obvious.
-
-Particularly important: Write your own names here. Take possession of the project.
-
-## Really? It belongs to us?
-
-Not entirely. It will be deleted at the end of Summer Semester 2021.
-
-As such, do not store anything important here, or rather -- make sure that you 
-have *other* copies of anything you will want after the end of Summer
-Semester 2021.
-
-You have been warned.

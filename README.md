@@ -9,6 +9,12 @@
   example: [Link](https://softwareengineering.stackexchange.com/questions/328636/what-should-be-the-datatype-of-the-tokens-a-lexer-returns-to-its-parser)
 - Version: v0.1
 
+## How to use
+
+```bash
+go run  ./cmd/compiler/main.go ./vinlang_src/sum.vl
+```
+
 ## Code guidelines
 
 ### Project structure

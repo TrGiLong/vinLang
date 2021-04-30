@@ -4,7 +4,7 @@
 
 - Specification
   draft: [Google Docs](https://docs.google.com/document/d/1xPEmMNa3Uk88ojS0cZ2JavUKcekrdJztDJ9aVXjb9jc/edit#)
-
+- Tutorial for writing lexer: [Link](https://www.aaronraff.dev/blog/how-to-write-a-lexer-in-go)
 - Tokens
   example: [Link](https://softwareengineering.stackexchange.com/questions/328636/what-should-be-the-datatype-of-the-tokens-a-lexer-returns-to-its-parser)
 - Version: v0.1

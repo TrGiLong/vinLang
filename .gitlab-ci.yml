@@ -1,8 +1,15 @@
 compiler_build:
+  stage: build
   image: golang:1.16.3
   script: go build -o ./build/vlc ./cmd/compiler/main.go
+  artifacts:
+    paths:
+      - build/
 
 vinlang_test:
+  stage: test
+  dependencies:
+    - build
   image: golang:1.16.3
   script: ./vinlang_test
   only:

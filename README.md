@@ -26,3 +26,55 @@ Follow a project structure from [here](https://github.com/golang-standards/proje
 - `pkg` is a library code that's ok to use by external applications
 - `vinlang_src` contains VinLang programs.
 
+## VinLang grammar
+```
+Program: SequenceStatement;
+
+Function: ‘hàm’  ID ‘(‘ FunctionArgs ‘)’  ‘:’ <Type> ‘{‘ SequenceStatement ‘}’
+FunctionArgs: FunctionArg (‘,’ FunctionArg)* 
+		        | e
+FunctionArg: ID ‘:’ Type
+
+SequenceStatement: Statement (Statement)* ;
+
+Statement: ID ‘=’ Expression ‘;’
+        | ‘nếu’ Bool ‘khong_thi’ Statement ‘thi’ Statement # if
+        | ‘lặp’ (VariableDeclaration; Bool; Expression)  	 # for
+        | ‘dung’ ‘;’							                         # break
+        | ‘tiep’ ‘;’						                           # continue
+        | ‘in’ Expression ‘;’						                   # print
+        | ‘{‘ SequenceStatement ‘}’					               # block code
+        | VariableDeclaration ’;’					                 # declare variable
+        | ‘tra’ Expression ‘;’ 						                 # return
+;
+
+VariableDeclaration: bien Id ‘:’ Type (‘=’ Expression);
+
+Type: ‘so’ | ‘chuoi’		// number or string 
+
+Expression: Number                                     # int
+          | 'read'                                     # read
+          | ID                                         # id
+          | expression '*' expression                  # binOp
+          | expression ('+'|'-') expression            # binOp
+          | '(' expression ')'                         # expParen
+          ;
+
+
+Bool: (‘dung’|’sai’)                                 # boolean
+    | Expression '=' Expression                      # relOp
+    | Expression '<=' Expression                     # relOp
+    | ‘khong’ Bool                                   # not
+    | Bool 'var' Bool                                # and
+    | '(' Bool ')'                                   # boolParen
+    ;
+
+Number: // Regex: ^\d*(.\d)*$
+
+ID: ID_R ( ‘(‘ )*
+ID_R// Regex: [a-z]([a-z]|\d)+
+
+Text: ‘“‘ AnyCharacter ‘“‘;
+AnyCharacter: // Regex: .+
+
+```

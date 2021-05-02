@@ -58,7 +58,9 @@ func (lexer *Lexer) Next() Token {
 			return Token{Type: DIV, Position: lexer.position}
 		case '=':
 			return Token{Type: ASSIGN, Position: lexer.position}
+
 		default:
+			print(string(r))
 			if unicode.IsSpace(r) {
 				continue // nothing to do here, just move on
 			} else if unicode.IsDigit(r) {
@@ -83,16 +85,17 @@ func (lexer *Lexer) nextNumber() Token {
 	for {
 		r, _, err := lexer.reader.ReadRune()
 		if err != nil {
-			if err == io.EOF {
+			if err == io.EOF && dotCounter {
 				// at the end of the identifier
-				return Token{Type: IDENTIFIER, Position: lexer.position, Text: number}
+				return Token{Type: INTEGER, Position: lexer.position, Text: number}
 			}
+			return Token{Type: DOUBLE, Position:  lexer.position,Text: number}
 		}
 
 		lexer.position.Column++
 		if unicode.IsDigit(r) {
 			number = number + string(r)
-		} else if (string(r) == "." && dotCounter) {
+		} else if string(r) == "." && dotCounter {
 			//Double only dot
 			number = number + string(r)
 			dotCounter = false
@@ -106,16 +109,10 @@ func (lexer *Lexer) nextNumber() Token {
 			return Token{Type: INTEGER, Position: lexer.position, Text: number}
 		}
 	}
-
-	if !dotCounter {
-		return Token{Type: DOUBLE}
-	}
-	return Token{Type: INTEGER}
 }
 
 func (lexer *Lexer) nextIdentifier() Token {
 	var identifier string
-	//var firstChar = true
 
 	for {
 		r, _, err := lexer.reader.ReadRune()
@@ -133,7 +130,7 @@ func (lexer *Lexer) nextIdentifier() Token {
 			identifier = identifier + string(r)
 		} else {
 			// scanned something not in the identifier
-			// TODO: lexer must read number after first char to identifier
+			// TODO: lexer must read number after first char to identifier + rename Identifier
 			lexer.back()
 			return Token{Type: IDENTIFIER, Position: lexer.position, Text: identifier}
 		}

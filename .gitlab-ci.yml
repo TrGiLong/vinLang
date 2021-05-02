@@ -1,2 +1,2 @@
 vinlang_test:
-  script: vinlang_test
+  script: ./vinlang_test

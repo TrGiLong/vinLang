@@ -25,7 +25,7 @@ func (lexer *Lexer) resetPosition() {
 
 func (lexer *Lexer) back() {
 	if err := lexer.reader.UnreadRune(); err != nil {
-		panic(err)
+		return
 	}
 
 	lexer.position.Column--
@@ -37,8 +37,9 @@ func (lexer *Lexer) Next() Token {
 		if err != nil {
 			if err == io.EOF {
 				return Token{Type: EOF}
+			} else {
+				return Token{Type: ILLEGAL}
 			}
-			return Token{Type: ILLEGAL}
 		}
 
 		lexer.position.Column++
@@ -60,7 +61,6 @@ func (lexer *Lexer) Next() Token {
 			return Token{Type: ASSIGN, Position: lexer.position}
 
 		default:
-			print(string(r))
 			if unicode.IsSpace(r) {
 				continue // nothing to do here, just move on
 			} else if unicode.IsDigit(r) {
@@ -68,7 +68,11 @@ func (lexer *Lexer) Next() Token {
 				return lexer.nextNumber()
 			} else if unicode.IsLetter(r) {
 				lexer.back()
-				return lexer.nextIdentifier()
+				token := lexer.nextIdentifier()
+				if isKeyword(&token.Text) {
+					return token.toKeyword()
+				}
+				return token
 			} else {
 				return Token{Type: ILLEGAL, Position: lexer.position, Text: string(r)}
 			}
@@ -84,12 +88,9 @@ func (lexer *Lexer) nextNumber() Token {
 
 	for {
 		r, _, err := lexer.reader.ReadRune()
-		if err != nil {
-			if err == io.EOF && dotCounter {
-				// at the end of the identifier
-				return Token{Type: INTEGER, Position: lexer.position, Text: number}
-			}
-			return Token{Type: DOUBLE, Position:  lexer.position,Text: number}
+		print(string(r))
+		if err != nil && err == io.EOF {
+			r = 0
 		}
 
 		lexer.position.Column++
@@ -116,11 +117,8 @@ func (lexer *Lexer) nextIdentifier() Token {
 
 	for {
 		r, _, err := lexer.reader.ReadRune()
-		if err != nil {
-			if err == io.EOF {
-				// at the end of the identifier
-				return Token{Type: IDENTIFIER, Position: lexer.position, Text: identifier}
-			}
+		if err != nil && err == io.EOF {
+			r = 0
 		}
 
 		lexer.position.Column++
@@ -129,8 +127,6 @@ func (lexer *Lexer) nextIdentifier() Token {
 		} else if unicode.IsDigit(r) {
 			identifier = identifier + string(r)
 		} else {
-			// scanned something not in the identifier
-			// TODO: lexer must read number after first char to identifier + rename Identifier
 			lexer.back()
 			return Token{Type: IDENTIFIER, Position: lexer.position, Text: identifier}
 		}

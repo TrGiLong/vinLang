@@ -12,7 +12,7 @@
 ## How to use
 
 ```bash
-go run  ./cmd/compiler/main.go ./vinlang_src/sum.vl
+go run  ./cmd/compiler/main.go ./vinlang_src/expression_2.vl
 ```
 
 ## Code guidelines

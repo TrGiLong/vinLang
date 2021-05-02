@@ -88,7 +88,6 @@ func (lexer *Lexer) nextNumber() Token {
 
 	for {
 		r, _, err := lexer.reader.ReadRune()
-		print(string(r))
 		if err != nil && err == io.EOF {
 			r = 0
 		}

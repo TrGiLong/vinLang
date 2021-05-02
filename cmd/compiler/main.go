@@ -8,7 +8,8 @@ import (
 )
 
 type Option struct {
-	Verbose []bool `short:"v" long:"verbose" description:"Verbose output"`
+	Verbose      bool `short:"v" long:"verbose" description:"Verbose output"`
+	WFatalErrors bool `long:"wfatal-errors" description:"This option causes the compiler to abort compilation on the first error occurred rather than trying to keep going and printing further error messages."`
 }
 
 var options Option
@@ -31,14 +32,27 @@ func main() {
 	lexer := Lexer.NewLexer(file)
 
 	// Analyse
+	var hasError bool = false
 	for {
 		token := lexer.Next()
 		if token.Type == Lexer.EOF {
 			break
 		}
 
-		fmt.Printf("%d:%d\t%s\t%s\n", token.Position.Line, token.Position.Column, token.Type, token.Text,
-		)
+		if options.Verbose {
+			fmt.Printf("%d:%d\t%s\t%s\n", token.Position.Line, token.Position.Column, token.Type, token.Text)
+		}
+
+		if token.Type == Lexer.ILLEGAL {
+			hasError = true
+			if options.WFatalErrors {
+				break
+			}
+		}
 	}
 
+	if hasError {
+		os.Exit(1)
+	}
+	os.Exit(0)
 }

@@ -32,6 +32,7 @@ func main() {
 	lexer := Lexer.NewLexer(file)
 
 	// Analyse
+	var hasError bool = false
 	for {
 		token := lexer.Next()
 		if token.Type == Lexer.EOF {
@@ -42,10 +43,16 @@ func main() {
 			fmt.Printf("%d:%d\t%s\t%s\n", token.Position.Line, token.Position.Column, token.Type, token.Text)
 		}
 
-		if options.WFatalErrors && token.Type == Lexer.ILLEGAL {
-			os.Exit(1)
+		if token.Type == Lexer.ILLEGAL {
+			hasError = true
+			if options.WFatalErrors {
+				break
+			}
 		}
 	}
 
+	if hasError {
+		os.Exit(1)
+	}
 	os.Exit(0)
 }

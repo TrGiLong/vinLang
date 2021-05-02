@@ -1,4 +1,23 @@
 #!/bin/bash
 
-go run ./cmd/compiler/main.go ./vinlang_src/correct/expression_1.vl
-go run ./cmd/compiler/main.go ./vinlang_src/correct/expression_5.vl
+for file in ./vinlang_src/correct/*; do
+  echo "Test $file"
+  go run ./cmd/compiler/main.go "$file"
+  if [ $? -eq 1 ]
+  then
+    echo "Successfully test $file"
+  else
+    echo "Unsuccessfully test $file"
+  fi
+done
+
+for file in ./vinlang_src/error/*; do
+  echo "Test $file"
+  go run ./cmd/compiler/main.go "$file"
+  if [ $? -eq 1 ]
+  then
+    echo "Successfully test $file"
+  else
+    echo "Unsuccessfully test $file"
+  fi
+done

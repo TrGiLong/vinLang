@@ -7,7 +7,7 @@ compiler_build:
       - build/
 
 vinlang_test:
-  stage: test
+  stage: compiler_build
   dependencies:
     - build
   image: golang:1.16.3

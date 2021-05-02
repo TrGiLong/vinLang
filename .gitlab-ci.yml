@@ -1,3 +1,7 @@
+compiler_build:
+  image: golang:1.16.3
+  script: go build -o ./build/vlc ./cmd/compiler/main.go
+
 vinlang_test:
   image: golang:1.16.3
   script: ./vinlang_test

@@ -4,18 +4,20 @@ hasError=false
 
 for file in ./vinlang_src/correct/*; do
   echo "Test $file"
-  go run ./cmd/compiler/main.go "$file"
+  ./build/vlc "$file"
   if [ $? -eq 1 ]
   then
+    printf "Failure\n\n"
     hasError=true
   fi
 done
 
 for file in ./vinlang_src/error/*; do
   echo "Test $file"
-  go run ./cmd/compiler/main.go "$file"
+  ./build/vlc "$file"
   if [ $? -eq 0 ]
   then
+    printf "Fail\ure\n\n"
     hasError=true
   fi
 done

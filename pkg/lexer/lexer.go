@@ -59,7 +59,10 @@ func (lexer *Lexer) Next() Token {
 			return Token{Type: DIV, Position: lexer.position}
 		case '=':
 			return Token{Type: ASSIGN, Position: lexer.position}
-
+		case '(':
+			return Token{Type: LEFT_BRACE, Position: lexer.position}
+		case ')':
+			return Token{Type: RIGHT_BRACE, Position: lexer.position}
 		default:
 			if unicode.IsSpace(r) {
 				continue // nothing to do here, just move on

@@ -63,6 +63,8 @@ func (lexer *Lexer) Next() Token {
 			return Token{Type: LEFT_BRACE, Position: lexer.position}
 		case ')':
 			return Token{Type: RIGHT_BRACE, Position: lexer.position}
+		case ':':
+			return Token{Type: COLON, Position: lexer.position}
 		default:
 			if unicode.IsSpace(r) {
 				continue // nothing to do here, just move on
@@ -107,9 +109,9 @@ func (lexer *Lexer) nextNumber() Token {
 			lexer.back()
 			//Double recognised
 			if !dotCounter {
-				return Token{Type: DOUBLE, Position: lexer.position, Text: number}
+				return Token{Type: NUMBER, Position: lexer.position, Text: number}
 			}
-			return Token{Type: INTEGER, Position: lexer.position, Text: number}
+			return Token{Type: NUMBER, Position: lexer.position, Text: number}
 		}
 	}
 }

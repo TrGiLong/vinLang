@@ -39,7 +39,7 @@ SequenceStatement: Statement (Statement)* ;
 
 Statement: ID ‘=’ Expression ‘;’
         | ‘nếu’ Bool ‘khong_thi’ Statement ‘thi’ Statement # if
-        | ‘lặp’ (Declaration; Bool; Expression)  	 # for
+        | ‘lặp’ (VarDeclaration; Bool; Expression)  	 # for
         | ‘dung’ ‘;’							                         # break
         | ‘tiep’ ‘;’						                           # continue
         | ‘in’ Expression ‘;’						                   # print
@@ -48,9 +48,9 @@ Statement: ID ‘=’ Expression ‘;’
         | ‘tra’ Expression ‘;’ 						                 # return
 ;
 
-Declaration: bien Id ‘:’ Type (‘=’ Expression)*;
+VarDeclaration: bien Id ‘:’ Type (‘=’ Expression)*;
 
-Type: ‘so’ | ‘chuoi’		// number or string 
+# Type: ‘so’ | ‘chuoi’		// number or string 
 
 Expression: Number                                     # int
           | 'read'                                     # read

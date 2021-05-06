@@ -38,12 +38,13 @@ type (
 	}
 
 	DeclStmt struct {
+		Pos lexer.Position
 		Decl Decl
 	}
 )
 
 func (x *AssignStmt) Position() lexer.Position { return x.Pos }
-func (x *DeclStmt) Position() lexer.Position   { return x.Decl.Position() }
+func (x *DeclStmt) Position() lexer.Position   { return x.Pos }
 
 func (x *AssignStmt) stmtNode() {}
 func (x *DeclStmt) stmtNode()   {}
@@ -59,7 +60,12 @@ type (
 	Identifier struct {
 		Pos  lexer.Position
 		Name string
-		//TODO: need declaration
+		//TODO: need varDeclaration
+	}
+
+	Type struct {
+		Pos  lexer.Position
+		Name string
 	}
 
 	// A BasicLit node represents a literal of basic type.
@@ -73,9 +79,11 @@ type (
 func (x *BinaryExpr) Position() lexer.Position { return x.Pos }
 func (x *Identifier) Position() lexer.Position { return x.Pos }
 func (x *BasicLit) Position() lexer.Position   { return x.Pos }
+func (x *Type) Position() lexer.Position       { return x.Pos }
 func (x *BinaryExpr) exprNode()                {}
 func (x *Identifier) exprNode()                {}
 func (x *BasicLit) exprNode()                  {}
+func (x *Type) exprNode()                      {}
 
 type (
 	VarDecl struct {
@@ -89,9 +97,10 @@ func (*VarDecl) declNode()                  {}
 
 type (
 	ValueSpec struct {
-		Pos   lexer.Position
+		Pos        lexer.Position
 		Identifier *Identifier
-		Value Expr
+		Type       *Type
+		Value      Expr
 	}
 )
 

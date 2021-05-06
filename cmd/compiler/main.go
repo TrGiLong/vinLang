@@ -1,8 +1,9 @@
 package main
 
 import (
-	"fmt"
-	Lexer "github.com/TrGiLong/vinLang/pkg/lexer"
+	vinLexer "github.com/TrGiLong/vinLang/pkg/lexer"
+	vinParser "github.com/TrGiLong/vinLang/pkg/parser"
+	"github.com/davecgh/go-spew/spew"
 	"github.com/jessevdk/go-flags"
 	"os"
 )
@@ -29,30 +30,11 @@ func main() {
 	}
 
 	// Create lexer
-	lexer := Lexer.NewLexer(file)
+	lexer := vinLexer.NewLexer(file)
+	parser := vinParser.NewParser(lexer)
 
-	// Analyse
-	var hasError bool = false
-	for {
-		token := lexer.Next()
-		if token.Type == Lexer.EOF {
-			break
-		}
+	ast := parser.Parse()
+	spew.Dump(ast)
 
-		if options.Verbose {
-			fmt.Printf("%d:%d\t%s\t%s\n", token.Position.Line, token.Position.Column, token.Type, token.Text)
-		}
-
-		if token.Type == Lexer.ILLEGAL {
-			hasError = true
-			if options.WFatalErrors {
-				break
-			}
-		}
-	}
-
-	if hasError {
-		os.Exit(1)
-	}
 	os.Exit(0)
 }

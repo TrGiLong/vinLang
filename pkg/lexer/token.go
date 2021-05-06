@@ -8,9 +8,10 @@ const (
 
 	IDENTIFIER
 
-	INTEGER
-	DOUBLE
+	NUMBER
+	STRING
 
+	COLON
 	SEMICOLON
 
 	VARIABLE
@@ -22,18 +23,18 @@ const (
 
 	ASSIGN // =
 
-	LEFT_BRACE // (
+	LEFT_BRACE  // (
 	RIGHT_BRACE // )
 
 	FUNCTION // function
-	RETURN // return
-	IF // if
-	ELIF // else if
-	ELSE // else
-	TRUE // true
-	FALSE // false
-	FOR // for
-	BREAK // break
+	RETURN   // return
+	IF       // if
+	ELIF     // else if
+	ELSE     // else
+	TRUE     // true
+	FALSE    // false
+	FOR      // for
+	BREAK    // break
 	CONTINUE // continue
 
 	//TODO: 1. () Keyword(eng)
@@ -43,8 +44,9 @@ var tokenTypes = []string{
 	EOF:        "EOF",
 	ILLEGAL:    "ILLEGAL",
 	IDENTIFIER: "IDENTIFIER",
-	INTEGER:    "INTEGER",
-	DOUBLE:     "DOUBLE",
+	COLON:      "COLON",
+	NUMBER:     "NUMBER",
+	STRING:     "STRING",
 	SEMICOLON:  ";",
 
 	VARIABLE: "VARIABLE",
@@ -56,20 +58,19 @@ var tokenTypes = []string{
 
 	ASSIGN: "=",
 
-	LEFT_BRACE: "(",
+	LEFT_BRACE:  "(",
 	RIGHT_BRACE: ")",
 
 	FUNCTION: "FUNCTION",
-	RETURN: "RETURN",
-	IF: "IF",
-	ELIF: "ELIF",
-	ELSE: "ELSE",
-	TRUE: "TRUE",
-	FALSE: "FALSE",
-	FOR: "FOR",
-	BREAK: "BREAK",
+	RETURN:   "RETURN",
+	IF:       "IF",
+	ELIF:     "ELIF",
+	ELSE:     "ELSE",
+	TRUE:     "TRUE",
+	FALSE:    "FALSE",
+	FOR:      "FOR",
+	BREAK:    "BREAK",
 	CONTINUE: "CONTINUE",
-
 }
 
 func (t TokenType) String() string {
@@ -119,5 +120,3 @@ type Token struct {
 func (token *Token) toKeyword() Token {
 	return Token{Type: toKeyword(&token.Text)}
 }
-
-

@@ -39,16 +39,16 @@ SequenceStatement: Statement (Statement)* ;
 
 Statement: ID ‘=’ Expression ‘;’
         | ‘nếu’ Bool ‘khong_thi’ Statement ‘thi’ Statement # if
-        | ‘lặp’ (VariableDeclaration; Bool; Expression)  	 # for
+        | ‘lặp’ (Declaration; Bool; Expression)  	 # for
         | ‘dung’ ‘;’							                         # break
         | ‘tiep’ ‘;’						                           # continue
         | ‘in’ Expression ‘;’						                   # print
         | ‘{‘ SequenceStatement ‘}’					               # block code
-        | VariableDeclaration ’;’					                 # declare variable
+        | Declaration ’;’					                 # declare variable
         | ‘tra’ Expression ‘;’ 						                 # return
 ;
 
-VariableDeclaration: bien Id ‘:’ Type (‘=’ Expression);
+Declaration: bien Id ‘:’ Type (‘=’ Expression)*;
 
 Type: ‘so’ | ‘chuoi’		// number or string 
 

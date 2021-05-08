@@ -17,7 +17,7 @@ for file in ./vinlang_src/error/*; do
   ./build/vlc "$file"
   if [ $? -eq 0 ]
   then
-    printf "Fail\ure\n\n"
+    printf "Failure\n\n"
     hasError=true
   fi
 done

@@ -1,9 +1,9 @@
 package main
 
 import (
-	vinLexer "github.com/TrGiLong/vinLang/pkg/lexer"
-	vinParser "github.com/TrGiLong/vinLang/pkg/parser"
-	"github.com/davecgh/go-spew/spew"
+	"fmt"
+	vinLang "github.com/TrGiLong/vinLang/pkg/antlr"
+	"github.com/antlr/antlr4/runtime/Go/antlr"
 	"github.com/jessevdk/go-flags"
 	"os"
 )
@@ -16,25 +16,37 @@ type Option struct {
 var options Option
 var parser = flags.NewParser(&options, flags.Default)
 
-func main() {
-	// Parse arguments
-	args, err := parser.Parse()
-	if err != nil {
-		panic(err)
-	}
+type VinLangListener struct {
+	*vinLang.BasevinLangListener
+}
 
-	// Open vl source file
-	file, err := os.Open(args[0])
-	if err != nil {
-		panic(err)
-	}
+func (l *VinLangListener) EnterEveryRule(ctx antlr.ParserRuleContext) {}
 
-	// Create lexer
-	lexer := vinLexer.NewLexer(file)
-	parser := vinParser.NewParser(lexer)
+func (l *VinLangListener) EnterDeclaration(ctx *vinLang.DeclarationContext) {
+fmt.Printf("%+v\n", ctx.GetText())
+}
 
-	ast := parser.Parse()
-	spew.Dump(ast)
+func
+main() {
+// Parse arguments
+args, err := parser.Parse()
+if err != nil {
+panic(err)
+}
 
-	os.Exit(0)
+input, err := antlr.NewFileStream(args[0])
+if err != nil {
+panic(err)
+}
+
+lexer := vinLang.NewvinLangLexer(input)
+stream := antlr.NewCommonTokenStream(lexer, antlr.TokenDefaultChannel)
+parser := vinLang.NewvinLangParser(stream)
+parser.AddErrorListener(antlr.NewDiagnosticErrorListener(true))
+parser.BuildParseTrees = true
+tree := parser.Program()
+
+antlr.ParseTreeWalkerDefault.Walk(&VinLangListener{}, tree)
+
+os.Exit(0)
 }

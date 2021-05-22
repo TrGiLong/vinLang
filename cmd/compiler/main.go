@@ -23,30 +23,30 @@ type VinLangListener struct {
 func (l *VinLangListener) EnterEveryRule(ctx antlr.ParserRuleContext) {}
 
 func (l *VinLangListener) EnterDeclaration(ctx *vinLang.DeclarationContext) {
-fmt.Printf("%+v\n", ctx.GetText())
+	fmt.Printf("%+v\n", ctx.GetText())
 }
 
 func
 main() {
-// Parse arguments
-args, err := parser.Parse()
-if err != nil {
-panic(err)
-}
+	// Parse arguments
+	args, err := parser.Parse()
+	if err != nil {
+		panic(err)
+	}
 
-input, err := antlr.NewFileStream(args[0])
-if err != nil {
-panic(err)
-}
+	input, err := antlr.NewFileStream(args[0])
+	if err != nil {
+		panic(err)
+	}
 
-lexer := vinLang.NewvinLangLexer(input)
-stream := antlr.NewCommonTokenStream(lexer, antlr.TokenDefaultChannel)
-parser := vinLang.NewvinLangParser(stream)
-parser.AddErrorListener(antlr.NewDiagnosticErrorListener(true))
-parser.BuildParseTrees = true
-tree := parser.Program()
+	lexer := vinLang.NewvinLangLexer(input)
+	stream := antlr.NewCommonTokenStream(lexer, antlr.TokenDefaultChannel)
+	parser := vinLang.NewvinLangParser(stream)
+	parser.AddErrorListener(antlr.NewDiagnosticErrorListener(true))
+	parser.BuildParseTrees = true
+	tree := parser.Program()
 
-antlr.ParseTreeWalkerDefault.Walk(&VinLangListener{}, tree)
+	antlr.ParseTreeWalkerDefault.Walk(&VinLangListener{}, tree)
 
-os.Exit(0)
+	os.Exit(0)
 }

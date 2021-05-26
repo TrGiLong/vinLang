@@ -25,6 +25,9 @@ SUB: '-';
 MUL: '*';
 DIV: '/';
 
+// TODO: them dau
+FOR: 'lap';
+
 NUMBER: DIGIT+ ('.' DIGIT+)?;
 DIGIT: [0-9];
 
@@ -36,3 +39,5 @@ CHAR: ([a-zA-Z0-9]|'\u00c0'..'\u1ed1');
 SPACE
  : [ \t\r\n] -> skip
  ;
+
+ //TODO: update features. More new test files

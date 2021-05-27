@@ -1,8 +1,8 @@
 biến a: số = (-4+10)/5;
 
-nếu (a = 1) {
+nếu (a > 1) {
     biến b = 1;
-} không_thì (a = 2) {
+} không_thì (a < 1) {
     biến b = 2;
 } thì {
     biến b = 3;

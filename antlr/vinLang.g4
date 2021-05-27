@@ -49,5 +49,3 @@ CHAR: ([a-zA-Z0-9]|'\u00c0'..'\u1ed1');
 SPACE
  : [ \t\r\n] -> skip
  ;
-
- //TODO: update features. More new test files

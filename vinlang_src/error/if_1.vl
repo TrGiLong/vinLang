@@ -1,7 +1,7 @@
 biến a: số = (-4+10)/5;
 
-nếu (đúng) {
+nếu (a < 2) {
     biến a = 1;
 } thì {
-    biến a = 2;
+    biến a = 3;
 }

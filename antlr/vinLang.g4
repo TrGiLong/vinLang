@@ -4,13 +4,25 @@ program: sequenceStatement;
 
 sequenceStatement: statement (statement)*;
 
-statement: declaration | forStatement;
+statement: (declaration SEMICOLIN) | forStatement;
 
 //assign: ID ASSIGN expression SEMICOLIN;
 
-declaration: VAR ID COLON ID ('=' expression)* SEMICOLIN;
+declaration: VAR ID COLON ID ('=' expression)*;
 
-forStatement: FOR '(' declaration ';' expression ';' statement ')';
+forStatement: FOR '(' declaration ';' boolExpression ';' statement ')';
+
+boolExpression: TRUE|FALSE
+    | expression '<' expression
+    | expression '>' expression
+    | expression '==' expression
+    | expression '<=' expression
+    | expression '>=' expression
+    | expression '!=' expression
+    | 'không' Bool
+    | Bool 'var' Bool
+    | '(' Bool ')'
+    ;
 
 expression: NUMBER
     | ID

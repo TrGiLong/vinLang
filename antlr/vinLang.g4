@@ -12,6 +12,8 @@ declaration: VAR ID COLON ID ('=' expression)* SEMICOLIN;
 
 forStatement: FOR '(' declaration ';' expression ';' statement ')';
 
+
+
 expression: NUMBER
     | ID
     | expression (MUL|DIV) expression

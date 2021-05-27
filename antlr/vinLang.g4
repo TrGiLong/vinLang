@@ -4,13 +4,25 @@ program: sequenceStatement;
 
 sequenceStatement: statement (statement)*;
 
-statement: declaration | forStatement | ifStatement;
+statement: (declaration SEMICOLIN) | forStatement | ifStatement;
 
 //assign: ID ASSIGN expression SEMICOLIN;
 
-declaration: VAR ID COLON ID ('=' expression)* SEMICOLIN;
+declaration: VAR ID COLON ID ('=' expression)*;
 
-forStatement: FOR '(' declaration ';' expression ';' statement ')';
+forStatement: FOR '(' declaration ';' boolExpression ';' statement ')';
+
+boolExpression: TRUE|FALSE
+    | expression '<' expression
+    | expression '>' expression
+    | expression '==' expression
+    | expression '<=' expression
+    | expression '>=' expression
+    | expression '!=' expression
+    | 'không' Bool
+    | Bool 'var' Bool
+    | '(' Bool ')'
+    ;
 
 ifStatement: IF '(' expression ')';
 
@@ -18,7 +30,7 @@ expression: NUMBER
     | ID
     | expression (MUL|DIV) expression
     | expression (ADD|SUB) expression
-    | '(' expression ')';
+    | '(' expression ')'
     | '{' SequenceStatement '}';
 
 VAR: 'biến';
@@ -35,11 +47,11 @@ FOR: 'lặp';
 CONTINUE: 'tiếp';
 BREAK: 'dừng';
 RETURN: 'trả';
-IF: 'nếu'
-ELSE:'thì'
-ELIF:'không_thì'
-TRUE:'đúng'
-FALSE:'sai'
+IF: 'nếu';
+ELSE:'thì';
+ELIF:'không_thì';
+TRUE:'đúng';
+FALSE:'sai';
 
 NUMBER: DIGIT+ ('.' DIGIT+)?;
 DIGIT: [0-9];

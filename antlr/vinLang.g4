@@ -4,32 +4,35 @@ program: sequenceStatement;
 
 sequenceStatement: statement (statement)*;
 
-statement: (declaration SEMICOLIN) | forStatement;
+statement: (declaration SEMICOLIN)
+    | forStatement
+    | (assign SEMICOLIN)
+    | '{' sequenceStatement '}';
 
-//assign: ID ASSIGN expression SEMICOLIN;
+assign: ID ASSIGN expression;
 
 declaration: VAR ID COLON ID ('=' expression)*;
 
-forStatement: FOR '(' declaration ';' boolExpression ';' statement ')';
+forStatement: FOR '(' declaration ';' boolExpression ';' assign ')' statement;
 
 boolExpression: TRUE|FALSE
-    | expression '<' expression
-    | expression '>' expression
-    | expression '==' expression
-    | expression '<=' expression
-    | expression '>=' expression
-    | expression '!=' expression
-    | 'không' Bool
-    | Bool 'var' Bool
-    | '(' Bool ')'
+    | expression E expression
+    | expression G expression
+    | expression L expression
+    | expression LE expression
+    | expression GE expression
+    | expression NE expression
+    | NEG boolExpression
+    | LEFT_PARENTHESE boolExpression RIGHT_PARENTHESE
     ;
 
 expression: NUMBER
     | ID
     | expression (MUL|DIV) expression
     | expression (ADD|SUB) expression
-    | '(' expression ')'
-    | '{' SequenceStatement '}';
+    | LEFT_PARENTHESE expression RIGHT_PARENTHESE
+    | LEFT_BRACE SequenceStatement RIGHT_BRACE;
+
 
 VAR: 'biến';
 
@@ -40,6 +43,19 @@ ADD: '+';
 SUB: '-';
 MUL: '*';
 DIV: '/' | '%';
+NEG: '!';
+LE: '<=';
+L: '<';
+G: '>';
+GE: '>=';
+E: '==';
+NE: '==';
+INCREMENT: '++';
+DECREMENT: '--';
+LEFT_BRACE: '{';
+RIGHT_BRACE: '}';
+LEFT_PARENTHESE: '(';
+RIGHT_PARENTHESE: ')';
 
 FOR: 'lặp';
 CONTINUE: 'tiếp';

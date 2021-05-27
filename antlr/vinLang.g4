@@ -15,18 +15,28 @@ expression: NUMBER
     | expression (MUL|DIV) expression
     | expression (ADD|SUB) expression
     | '(' expression ')';
+    | '{' SequenceStatement '}';
 
 VAR: 'biến';
+
 COLON: ':';
 SEMICOLIN: ';';
 ASSIGN: '=';
 ADD: '+';
 SUB: '-';
 MUL: '*';
-DIV: '/';
+DIV: '/' | '%';
+LEFTBRACKET
 
-// TODO: them dau
-FOR: 'lap';
+FOR: 'lặp';
+CONTINUE: 'tiếp';
+BREAK: 'dừng';
+RETURN: 'trả';
+IF: 'nếu'
+ELSE:'thì'
+ELIF:'không_thì'
+TRUE:'đúng'
+FALSE:'sai'
 
 NUMBER: DIGIT+ ('.' DIGIT+)?;
 DIGIT: [0-9];

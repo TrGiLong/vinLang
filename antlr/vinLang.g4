@@ -12,13 +12,11 @@ declaration: VAR ID COLON ID ('=' expression)* SEMICOLIN;
 
 forStatement: FOR '(' declaration ';' expression ';' statement ')';
 
-
-
 expression: NUMBER
     | ID
     | expression (MUL|DIV) expression
     | expression (ADD|SUB) expression
-    | '(' expression ')';
+    | '(' expression ')'
     | '{' SequenceStatement '}';
 
 VAR: 'biến';
@@ -35,11 +33,11 @@ FOR: 'lặp';
 CONTINUE: 'tiếp';
 BREAK: 'dừng';
 RETURN: 'trả';
-IF: 'nếu'
-ELSE:'thì'
-ELIF:'không_thì'
-TRUE:'đúng'
-FALSE:'sai'
+IF: 'nếu';
+ELSE:'thì';
+ELIF:'không_thì';
+TRUE:'đúng';
+FALSE:'sai';
 
 NUMBER: DIGIT+ ('.' DIGIT+)?;
 DIGIT: [0-9];

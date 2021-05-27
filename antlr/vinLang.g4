@@ -12,6 +12,8 @@ declaration: VAR ID COLON ID ('=' expression)*;
 
 forStatement: FOR '(' declaration ';' boolExpression ';' statement ')';
 
+ifStatement: IF '(' boolExpression ')';
+
 boolExpression: TRUE|FALSE
     | expression '<' expression
     | expression '>' expression
@@ -23,8 +25,6 @@ boolExpression: TRUE|FALSE
     | Bool 'var' Bool
     | '(' Bool ')'
     ;
-
-ifStatement: IF '(' expression ')';
 
 expression: NUMBER
     | ID
@@ -53,7 +53,7 @@ ELIF:'không_thì';
 TRUE:'đúng';
 FALSE:'sai';
 
-NUMBER: DIGIT+ ('.' DIGIT+)?;
+NUMBER: '-'* DIGIT+ ('.' DIGIT+)?;
 DIGIT: [0-9];
 
 ID: CHAR+;

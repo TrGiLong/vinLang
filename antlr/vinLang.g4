@@ -4,13 +4,15 @@ program: sequenceStatement;
 
 sequenceStatement: statement (statement)*;
 
-statement: declaration | forStatement;
+statement: declaration | forStatement | ifStatement;
 
 //assign: ID ASSIGN expression SEMICOLIN;
 
 declaration: VAR ID COLON ID ('=' expression)* SEMICOLIN;
 
 forStatement: FOR '(' declaration ';' expression ';' statement ')';
+
+ifStatement: IF '(' expression ')';
 
 expression: NUMBER
     | ID

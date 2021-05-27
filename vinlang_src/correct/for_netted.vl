@@ -1,0 +1,8 @@
+biến a: số = 0;
+
+lặp (biến i: số = 0; i < 3; i = i + 1) {
+    b = a + i;
+    lặp (biến j: số = 0; j < 3; j = j + 1) {
+        a = i;
+    }
+}

@@ -4,6 +4,10 @@ nếu (a > 1) {
     biến b = 1;
 } không_thì (a < 1) {
     biến b = 2;
+nếu (a > 1) {
+    biến b > 1;
+} không_thì (a < 1) {
+    biến b < 2;
 } thì {
     biến b = 3;
 }

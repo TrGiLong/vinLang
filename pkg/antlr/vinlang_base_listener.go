@@ -57,6 +57,30 @@ func (s *BasevinLangListener) EnterForStatement(ctx *ForStatementContext) {}
 // ExitForStatement is called when production forStatement is exited.
 func (s *BasevinLangListener) ExitForStatement(ctx *ForStatementContext) {}
 
+// EnterFunctionDeclaration is called when production functionDeclaration is entered.
+func (s *BasevinLangListener) EnterFunctionDeclaration(ctx *FunctionDeclarationContext) {}
+
+// ExitFunctionDeclaration is called when production functionDeclaration is exited.
+func (s *BasevinLangListener) ExitFunctionDeclaration(ctx *FunctionDeclarationContext) {}
+
+// EnterFunctionArgs is called when production functionArgs is entered.
+func (s *BasevinLangListener) EnterFunctionArgs(ctx *FunctionArgsContext) {}
+
+// ExitFunctionArgs is called when production functionArgs is exited.
+func (s *BasevinLangListener) ExitFunctionArgs(ctx *FunctionArgsContext) {}
+
+// EnterFunctionCall is called when production functionCall is entered.
+func (s *BasevinLangListener) EnterFunctionCall(ctx *FunctionCallContext) {}
+
+// ExitFunctionCall is called when production functionCall is exited.
+func (s *BasevinLangListener) ExitFunctionCall(ctx *FunctionCallContext) {}
+
+// EnterIfStatement is called when production ifStatement is entered.
+func (s *BasevinLangListener) EnterIfStatement(ctx *IfStatementContext) {}
+
+// ExitIfStatement is called when production ifStatement is exited.
+func (s *BasevinLangListener) ExitIfStatement(ctx *IfStatementContext) {}
+
 // EnterBoolExpression is called when production boolExpression is entered.
 func (s *BasevinLangListener) EnterBoolExpression(ctx *BoolExpressionContext) {}
 

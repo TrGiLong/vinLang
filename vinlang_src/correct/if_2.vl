@@ -1,9 +1,9 @@
 biến a: số = (-4+10)/5;
 
 nếu (a == 1) {
-    biến b = 1;
+    biến b: số = 1;
 } không_thì (a == 2) {
-    biến b = 2;
+    biến b: số = 2;
 } thì {
-    biến b = 3;
+    biến b: số = 3;
 }

@@ -1,11 +1,12 @@
 package main
 
 import (
-	"fmt"
 	vinLang "github.com/TrGiLong/vinLang/pkg/antlr"
+	s "github.com/TrGiLong/vinLang/pkg/semantic"
 	"github.com/antlr/antlr4/runtime/Go/antlr"
 	"github.com/jessevdk/go-flags"
 	"os"
+
 )
 
 type Option struct {
@@ -15,16 +16,6 @@ type Option struct {
 
 var options Option
 var parser = flags.NewParser(&options, flags.Default)
-
-type VinLangListener struct {
-	*vinLang.BasevinLangListener
-}
-
-func (l *VinLangListener) EnterEveryRule(ctx antlr.ParserRuleContext) {}
-
-func (l *VinLangListener) EnterDeclaration(ctx *vinLang.DeclarationContext) {
-	fmt.Printf("%+v\n", ctx.GetText())
-}
 
 func
 main() {
@@ -46,7 +37,8 @@ main() {
 	parser.BuildParseTrees = true
 	tree := parser.Program()
 
-	antlr.ParseTreeWalkerDefault.Walk(&VinLangListener{}, tree)
+	semantic := s.NewSemantic(&tree)
+	semantic.Analyse()
 
 	os.Exit(0)
 }

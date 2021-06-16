@@ -26,6 +26,18 @@ type vinLangListener interface {
 	// EnterForStatement is called when entering the forStatement production.
 	EnterForStatement(c *ForStatementContext)
 
+	// EnterFunctionDeclaration is called when entering the functionDeclaration production.
+	EnterFunctionDeclaration(c *FunctionDeclarationContext)
+
+	// EnterFunctionArgs is called when entering the functionArgs production.
+	EnterFunctionArgs(c *FunctionArgsContext)
+
+	// EnterFunctionCall is called when entering the functionCall production.
+	EnterFunctionCall(c *FunctionCallContext)
+
+	// EnterIfStatement is called when entering the ifStatement production.
+	EnterIfStatement(c *IfStatementContext)
+
 	// EnterBoolExpression is called when entering the boolExpression production.
 	EnterBoolExpression(c *BoolExpressionContext)
 
@@ -49,6 +61,18 @@ type vinLangListener interface {
 
 	// ExitForStatement is called when exiting the forStatement production.
 	ExitForStatement(c *ForStatementContext)
+
+	// ExitFunctionDeclaration is called when exiting the functionDeclaration production.
+	ExitFunctionDeclaration(c *FunctionDeclarationContext)
+
+	// ExitFunctionArgs is called when exiting the functionArgs production.
+	ExitFunctionArgs(c *FunctionArgsContext)
+
+	// ExitFunctionCall is called when exiting the functionCall production.
+	ExitFunctionCall(c *FunctionCallContext)
+
+	// ExitIfStatement is called when exiting the ifStatement production.
+	ExitIfStatement(c *IfStatementContext)
 
 	// ExitBoolExpression is called when exiting the boolExpression production.
 	ExitBoolExpression(c *BoolExpressionContext)

@@ -15,6 +15,8 @@ declaration: VAR ID COLON ID (ASSIGN expression)*;
 
 forStatement: FOR LEFT_PARENTHESE declaration SEMICOLIN boolExpression SEMICOLIN assign RIGHT_PARENTHESE statement;
 
+ifStatement: IF '(' boolExpression ')';
+
 boolExpression: TRUE|FALSE
     | expression E expression
     | expression G expression
@@ -67,7 +69,7 @@ ELIF:'không_thì';
 TRUE:'đúng';
 FALSE:'sai';
 
-NUMBER: SUB* DIGIT+ ('.' DIGIT+)?;
+NUMBER: '-'* DIGIT+ ('.' DIGIT+)?;
 DIGIT: [0-9];
 
 ID: CHAR+;

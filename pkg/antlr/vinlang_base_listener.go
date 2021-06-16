@@ -39,11 +39,29 @@ func (s *BasevinLangListener) EnterStatement(ctx *StatementContext) {}
 // ExitStatement is called when production statement is exited.
 func (s *BasevinLangListener) ExitStatement(ctx *StatementContext) {}
 
+// EnterAssign is called when production assign is entered.
+func (s *BasevinLangListener) EnterAssign(ctx *AssignContext) {}
+
+// ExitAssign is called when production assign is exited.
+func (s *BasevinLangListener) ExitAssign(ctx *AssignContext) {}
+
 // EnterDeclaration is called when production declaration is entered.
 func (s *BasevinLangListener) EnterDeclaration(ctx *DeclarationContext) {}
 
 // ExitDeclaration is called when production declaration is exited.
 func (s *BasevinLangListener) ExitDeclaration(ctx *DeclarationContext) {}
+
+// EnterForStatement is called when production forStatement is entered.
+func (s *BasevinLangListener) EnterForStatement(ctx *ForStatementContext) {}
+
+// ExitForStatement is called when production forStatement is exited.
+func (s *BasevinLangListener) ExitForStatement(ctx *ForStatementContext) {}
+
+// EnterBoolExpression is called when production boolExpression is entered.
+func (s *BasevinLangListener) EnterBoolExpression(ctx *BoolExpressionContext) {}
+
+// ExitBoolExpression is called when production boolExpression is exited.
+func (s *BasevinLangListener) ExitBoolExpression(ctx *BoolExpressionContext) {}
 
 // EnterExpression is called when production expression is entered.
 func (s *BasevinLangListener) EnterExpression(ctx *ExpressionContext) {}

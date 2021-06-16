@@ -7,13 +7,13 @@ sequenceStatement: statement (statement)*;
 statement: (declaration SEMICOLIN)
     | forStatement
     | (assign SEMICOLIN)
-    | '{' sequenceStatement '}';
+    | LEFT_BRACE sequenceStatement RIGHT_BRACE;
 
 assign: ID ASSIGN expression;
 
-declaration: VAR ID COLON ID ('=' expression)*;
+declaration: VAR ID COLON ID (ASSIGN expression)*;
 
-forStatement: FOR '(' declaration ';' boolExpression ';' assign ')' statement;
+forStatement: FOR LEFT_PARENTHESE declaration SEMICOLIN boolExpression SEMICOLIN assign RIGHT_PARENTHESE statement;
 
 boolExpression: TRUE|FALSE
     | expression E expression
@@ -67,7 +67,7 @@ ELIF:'không_thì';
 TRUE:'đúng';
 FALSE:'sai';
 
-NUMBER: DIGIT+ ('.' DIGIT+)?;
+NUMBER: SUB* DIGIT+ ('.' DIGIT+)?;
 DIGIT: [0-9];
 
 ID: CHAR+;

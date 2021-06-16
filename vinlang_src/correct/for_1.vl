@@ -2,4 +2,9 @@ biến a: số = 0;
 
 lặp (biến i: số = 0; i < 3; i = i + 1) {
     a = i;
+
+    lặp (biến i: số = 0; i < 3; i = i + 1) {
+        a = i;
+    }
+
 }
